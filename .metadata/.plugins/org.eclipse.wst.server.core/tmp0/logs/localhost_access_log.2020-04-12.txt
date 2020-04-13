@@ -1,0 +1,7 @@
+127.0.0.1 - - [12/Apr/2020:07:43:38 +0100] "GET / HTTP/1.1" 404 709
+127.0.0.1 - - [12/Apr/2020:07:43:51 +0100] "GET /SpringMVC_TEST/index.jsp HTTP/1.1" 404 737
+127.0.0.1 - - [12/Apr/2020:07:45:32 +0100] "GET /SpringMVC_TEST/index.jsp HTTP/1.1" 200 503
+127.0.0.1 - - [12/Apr/2020:07:45:34 +0100] "GET /SpringMVC_TEST/welcome.html HTTP/1.1" 200 846
+127.0.0.1 - - [12/Apr/2020:07:46:59 +0100] "GET / HTTP/1.1" 404 709
+127.0.0.1 - - [12/Apr/2020:07:47:08 +0100] "GET /SpringMVC_TEST/index.jsp HTTP/1.1" 200 503
+127.0.0.1 - - [12/Apr/2020:07:47:10 +0100] "GET /SpringMVC_TEST/welcome.html HTTP/1.1" 404 788
