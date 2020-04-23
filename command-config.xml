@@ -1,0 +1,45 @@
+<catalog name="ptt">
+	<!-- 主流程，用telnet進入PTT -->  
+	<chain name="IntoPTT">
+	  <command id="exceptionHandler" className="info.diywork.PTTSpider.chain.command.ExceptionHandler"/>  
+	  <command id="login" className="info.diywork.PTTSpider.chain.command.Login"/>
+	</chain>
+	
+	<!-- IntoPTT的子流程，抓取AllPost的UserList 以下都被GetIPList取代了-->  
+	<chain name="GetUserList">
+	  <command id="exceptionHandler" className="info.diywork.PTTSpider.chain.command.ExceptionHandler"/>
+	  <command id="initCassandra" className="info.diywork.PTTSpider.chain.command.Cassandra"/>  
+	  <command id="gotoAllPostBoard" className="info.diywork.PTTSpider.chain.command.GotoALLPOSTBoard"/>
+	  <command id="getUserList" className="info.diywork.PTTSpider.chain.command.GetUserList"/>
+	  <command id="disconnect" className="info.diywork.PTTSpider.chain.command.Disconnect"/>
+	  <command id="systemWait" className="info.diywork.PTTSpider.chain.command.SystemWait"/>
+	</chain>
+	
+	<!-- IntoPTT的子流程，根據UserList抓取UserIP及明細資料 -->
+	<chain name="GetIPList">
+		<command id="exceptionHandler" className="info.diywork.PTTSpider.chain.command.ExceptionHandler"/>
+		<command id="initCassandra" className="info.diywork.PTTSpider.chain.command.Cassandra"/>
+		<command id="gotoMainMenu" className="info.diywork.PTTSpider.chain.command.GotoMainMenu"/>
+		<command id="queryUserData" className="info.diywork.PTTSpider.chain.command.QueryUserData"/>
+		<command id="disconnect" className="info.diywork.PTTSpider.chain.command.Disconnect"/>
+		<command id="systemWait" className="info.diywork.PTTSpider.chain.command.SystemWait"/>
+	</chain>
+	
+	<!-- 主流程，抓取webPtt的AllPost -->
+	<chain name="GetAllPost">
+		<command id="exceptionHandler" className="info.diywork.PTTSpider.chain.command.ExceptionHandler"/>
+		<command id="initCassandra" className="info.diywork.PTTSpider.chain.command.Cassandra"/>
+		<command id="getAllPost" className="info.diywork.PTTSpider.chain.command.GetAllPost"/>
+		<command id="systemWait" className="info.diywork.PTTSpider.chain.command.SystemWait"/>
+	</chain>  
+	
+	<!-- GetAllPost的子流程，抓取PO文跟推文 -->
+	<chain name="GetOnePostData">
+		<command id="exceptionHandler" className="info.diywork.PTTSpider.chain.command.ExceptionHandler"/>
+		<command id="initCassandra" className="info.diywork.PTTSpider.chain.command.Cassandra"/>
+		<command id="parsePostData" className="info.diywork.PTTSpider.chain.command.ParsePostData"/>
+		<command id="savePostData" className="info.diywork.PTTSpider.chain.command.SavePostData"/>
+		<command id="saveCommemtData" className="info.diywork.PTTSpider.chain.command.SaveCommentData"/>
+		<command id="saveForElasticSearch" className="info.diywork.PTTSpider.chain.command.SaveForElasticSearch"/>
+	</chain>
+</catalog> 
